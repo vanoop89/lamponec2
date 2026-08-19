@@ -1,4 +1,4 @@
 - name: Deploy EC2 Instances
   hosts: localhost
   roles:
-    - roles/deploy-ec2
+    - deploy-ec2

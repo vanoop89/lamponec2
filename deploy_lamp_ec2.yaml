@@ -6,7 +6,6 @@
   become_method: sudo 
   #become_password: false 
   roles:
-   # - roles/webserver
     - webserver
   
 - name: Deploy Database Server
@@ -16,7 +15,6 @@
   become_method: sudo 
   #become_password: false 
   roles: 
-    #- roles/database
      - database 
 
 
