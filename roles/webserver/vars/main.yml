@@ -1,0 +1,3 @@
+---
+# vars file for webserver
+DocumentRoot: "/var/www/html"

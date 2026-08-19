@@ -1,0 +1,35 @@
+---
+# tasks file for database
+- name: Install MariaDB 10.11
+  ansible.builtin.dnf:
+      name: 
+        - mariadb1011
+        - mariadb1011-server
+      state: present
+  notify: Start MariaDB
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Install pip3
+  ansible.builtin.dnf:
+      name: python3-pip
+      state: present
+- name: Install PyMySQL
+  ansible.builtin.pip:
+      name: PyMySQL
+      executable: pip3
+      state: present
+- name: Create Wordpress Database
+  ansible.mysql.mysql_db:
+    name: mywp
+    state: present
+    login_unix_socket: /var/lib/mysql/mysql.sock
+- name: Create DB user with privilege
+  ansible.mysql.mysql_user:
+    name: wpuser
+    host: '%'
+    password: wpuser123
+    priv: 'mywp.*:ALL'
+    state: present
+    login_unix_socket: /var/lib/mysql/mysql.sock

@@ -1,0 +1,43 @@
+- name: Create Security Group for WebServer
+  amazon.aws.ec2_security_group:
+      name: awslearning-webserver
+      description: "To allow connections to webservers"
+      region: us-east-2
+      state: present
+      rules:
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 443
+          to_port: 443
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: 0.0.0.0/0
+      rules_egress:
+        - proto: all
+          cidr_ip: 0.0.0.0/0
+          rule_desc: "Allow all outbound traffic"
+- name: Create Security Group for DB Server
+  amazon.aws.ec2_security_group:
+      name: awslearning-db
+      description: "To Allow connections from Webserver to DB"
+      region: us-east-2
+      state: present
+      rules:
+        - proto: tcp
+          group_name: awslearning-webserver
+          from_port: 3306
+          to_port: 3306
+        
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: 0.0.0.0/0
+        
+      rules_egress:
+        - proto: all
+          cidr_ip: 0.0.0.0/0

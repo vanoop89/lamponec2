@@ -1,0 +1,23 @@
+---
+- name: Deploy Webserver
+  hosts: web
+  become: true
+  become_user: root 
+  become_method: sudo 
+  #become_password: false 
+  roles:
+   # - roles/webserver
+    - webserver
+  
+- name: Deploy Database Server
+  hosts: db
+  become: true
+  become_user: root 
+  become_method: sudo 
+  #become_password: false 
+  roles: 
+    #- roles/database
+     - database 
+
+
+     

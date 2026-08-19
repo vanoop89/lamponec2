@@ -1,0 +1,3 @@
+---
+# vars file for lamponec2
+DocumentRoot: "/var/www/html"

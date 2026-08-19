@@ -1,0 +1,6 @@
+---
+# tasks file for deploy-ec2
+- name: Include SG 
+  ansible.builtin.include_tasks: security_group.yaml
+- name: Include EC2 Instance 
+  ansible.builtin.include_tasks: aws_ec2.yaml

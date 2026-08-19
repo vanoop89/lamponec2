@@ -1,0 +1,11 @@
+plugin: amazon.aws.aws_ec2
+aws_profile: default
+regions:
+ - us-east-2
+hostname:
+  - ip-address
+#keyed_groups:
+ # - prefix:
+groups:
+  web: "'webserver' in tags.type"
+  db: "'database' in tags.type"
