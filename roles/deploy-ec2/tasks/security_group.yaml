@@ -29,7 +29,7 @@
       state: present
       rules:
         - proto: tcp
-          group_name: webserver-ansible-01
+          group_name: "{{ sg_web | default('webserver-ansible-01', true) }}"
           from_port: 3306
           to_port: 3306
         
