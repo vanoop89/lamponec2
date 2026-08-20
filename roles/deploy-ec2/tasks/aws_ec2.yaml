@@ -1,6 +1,6 @@
 - name: Create webserver EC2 Instances
   amazon.aws.ec2_instance:
-    name: "{{ item }}"
+    name: web01
     instance_type: t3.micro
     image_id: ami-028ba4d4ccb4b7b72
     key_name: anoop-aws-training
@@ -10,13 +10,11 @@
     tags:
       type: webserver
       os: al3 
-  loop:
-    - web01
-    - web02
+      Name: Web01
   
 - name: Create DB EC2 Instance
   amazon.aws.ec2_instance:
-        name: "{{ item }}"
+        name: db01
         instance_type: t3.micro 
         image_id: ami-028ba4d4ccb4b7b72
         key_name: anoop-aws-training
@@ -26,5 +24,4 @@
         tags: 
           type: database
           os: al3
-  loop:
-    - db01
+          Name: DB01

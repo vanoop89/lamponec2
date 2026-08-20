@@ -1,7 +1,7 @@
 - name: Create Security Group for WebServer
   amazon.aws.ec2_security_group:
-      name: awslearning-webserver
-      description: "To allow connections to webservers"
+      name: webserver-ansible-01
+      description: "To allow http, https and SSH connections to webserver"
       region: us-east-2
       state: present
       rules:
@@ -23,13 +23,13 @@
           rule_desc: "Allow all outbound traffic"
 - name: Create Security Group for DB Server
   amazon.aws.ec2_security_group:
-      name: awslearning-db
-      description: "To Allow connections from Webserver to DB"
+      name: database-ansible-01
+    description: "To Allow MySQL connections from Webserver to DB, and also allow SSH"
       region: us-east-2
       state: present
       rules:
         - proto: tcp
-          group_name: awslearning-webserver
+          group_name: webserver-ansible-01
           from_port: 3306
           to_port: 3306
         
