@@ -1,0 +1,12 @@
+- name: Create new EC2 Instance Key Pair
+  amazon.aws.ec2_key:
+     name: "{{ ec2_key_name }}"
+     region: "{{ aws_region | default('us-east-2', true) }}"
+     state: present
+  register: ec2_key
+  
+- name: Save the Private Key
+  ansible.builtin.copy:
+     content: "{{ ec2_key.key.private_key }}"
+     dest: /root/{{ ec2_key_name }}.pem
+     mode: 0400

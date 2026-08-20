@@ -1,8 +1,8 @@
 - name: Create Security Group for WebServer
   amazon.aws.ec2_security_group:
-      name: webserver-ansible-01
+      name: "{{ sg_web | default('webserver-ansible-01', true) }}"
       description: "To allow http, https and SSH connections to webserver"
-      region: us-east-2
+      region: "{{ aws_region | default('us-east-2', true) }}"
       state: present
       rules:
         - proto: tcp
@@ -23,9 +23,9 @@
           rule_desc: "Allow all outbound traffic"
 - name: Create Security Group for DB Server
   amazon.aws.ec2_security_group:
-      name: database-ansible-01
-    description: "To Allow MySQL connections from Webserver to DB, and also allow SSH"
-      region: us-east-2
+      name: "{{ sg_db | default('database-ansible-01', true) }}"
+      description: "To Allow MySQL connections from Webserver to DB, and also allow SSH"
+      region: "{{ aws_region | default('us-east-2', true) }}"
       state: present
       rules:
         - proto: tcp
