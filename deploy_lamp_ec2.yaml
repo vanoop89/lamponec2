@@ -1,6 +1,6 @@
 ---
 - name: Deploy Webserver
-  hosts: web
+  hosts: webserver
   become: true
   become_user: root 
   become_method: sudo 
@@ -9,7 +9,7 @@
     - webserver
   
 - name: Deploy Database Server
-  hosts: db
+  hosts: database
   become: true
   become_user: root 
   become_method: sudo 

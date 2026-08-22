@@ -8,6 +8,7 @@
 
 - name: Start PHP-FPM
   ansible.builtin.service:
-     name: php-fpm 
+     name: "{{ item }}"
      state: started 
      enabled: yes
+  loop: "{{ ansible_facts.services | dict2items |selectattr('key', 'search', 'php.*fpm') |map(attribute='key') | list}}"
