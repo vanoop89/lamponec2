@@ -1,2 +1,5 @@
 ---
 # defaults file for database
+mysql_password_file: /root/.myapp_mysql_password
+mysql_db_name: wpanoo1234
+mysql_user_name: anoop1234

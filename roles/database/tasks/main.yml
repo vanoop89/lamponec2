@@ -22,14 +22,40 @@
       state: present
 - name: Create Wordpress Database
   ansible.mysql.mysql_db:
-    name: mywp
+    name: {{ mysql_db_name }}
     state: present
     login_unix_socket: /var/lib/mysql/mysql.sock
+
+- name: Generate password when it does not exist
+  ansible.builtin.set_fact:
+    mysql_user_password: >-
+     {{ lookup('ansible.builtin.password',
+               '/dev/null',
+               length=24,
+               chars=['ascii_letters', 'digits']) }}
+  no_log: true
+
 - name: Create DB user with privilege
   ansible.mysql.mysql_user:
     name: wpuser
     host: '%'
-    password: wpuser123
-    priv: 'mywp.*:ALL'
+    password: "{{ mysql_user_password }}"
+    priv: '{{ mysql_db_name }}.*:ALL'
     state: present
     login_unix_socket: /var/lib/mysql/mysql.sock
+
+- name: Save generated password
+  ansible.builtin.copy:
+    content: "{{ mysql_user_password }}\n"
+    dest: "{{ mysql_password_file }}"
+    owner: root
+    group: root
+    mode: '0600'
+  delegate_to: localhost
+  
+- name: Show credentials
+  ansible.builtin.debug:
+    msg:
+      database: "{{ mysql_db_name }}"
+      username: "{{ mysql_user_name }}"
+      password: "{{ mysql_user_password }}"
