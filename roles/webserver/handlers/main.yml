@@ -1,13 +1,10 @@
 ---
 # handlers file for webserver
-- name: Start Apache
+- name: Start Service
   ansible.builtin.service: 
-    name: httpd
+    name: "{{ item }}"
     state: started
     enabled: yes
-
-- name: Start PHP-FPM
-  ansible.builtin.service:
-     name: php-fpm 
-     state: started 
-     enabled: yes
+  loop:
+    - httpd
+    - php-fpm

@@ -8,7 +8,8 @@ db_name: "db01"
 aws_region: "us-east-2"
 
 # AMI/Image used to create the instance, AMI ID varies in each AZ
-ec2_image: "ami-06475e8f54266e38e" 
+# Use only AmazonLinux Image
+ec2_image: "ami-06f5453d29c62393b" 
 
 # Instance type
 ec2_type: "t3.micro"
@@ -19,3 +20,6 @@ ec2_key_name: "dbandweb-ansible"
 # Security Group(SG) name for each Instance
 sg_web: "webserver-ansible-01"
 sg_db: "database-ansible-01"
+
+# OS tag
+os_family: redhat

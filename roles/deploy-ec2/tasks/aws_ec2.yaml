@@ -3,14 +3,14 @@
     name: "{{ web_name | default('web01', true ) }}"
     region: "{{ aws_region | default('us-east-2', true) }}"
     instance_type: "{{ ec2_type | default('t3.micro', true) }}"
-    image_id: "{{ ec2_image | default('ami-06475e8f54266e38e', true) }}"
+    image_id: "{{ ec2_image | default('ami-06f5453d29c62393b', true) }}"
     key_name: "{{ ec2_key_name }}"
     network_interfaces:
         - assign_public_ip: true
     security_group: "{{ sg_web | default('webserver-ansible-01', true) }}"
     tags:
       type: webserver
-      os: AL3 
+      os_name: "{{ os_family }}"
       
   
 - name: Create DB EC2 Instance
@@ -18,12 +18,12 @@
         name: "{{ db_name | default('db01', true ) }}"
         region: "{{ aws_region | default('us-east-2', true) }}"
         instance_type: "{{ ec2_type | default('t3.micro', true) }}" 
-        image_id: "{{ ec2_image | default('ami-06475e8f54266e38e', true) }}"
+        image_id: "{{ ec2_image | default('ami-06f5453d29c62393b', true) }}"
         key_name: "{{ ec2_key_name }}"
         network_interfaces:
             - assign_public_ip: true
         security_group: "{{ sg_db | default('database-ansible-01', true) }}"
         tags: 
           type: database
-          os: AL3
+          os_name: "{{ os_family }}"
           
