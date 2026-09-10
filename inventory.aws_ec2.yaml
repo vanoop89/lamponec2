@@ -6,13 +6,6 @@ hostname:
   - ip-address
 #keyed_groups:
  # - prefix:
-#groups:
-#  web: "'webserver' in tags.type"
- # db: "'database' in tags.type"
-keyed_groups:
-  - key: tags.type
-    prefix: ""
-    separator: ""
-  - key: tags.os
-    prefix: "os_"
-    separator: ""
+groups:
+    web: "'webserver' in tags.type"
+    db: "'database' in tags.type"
