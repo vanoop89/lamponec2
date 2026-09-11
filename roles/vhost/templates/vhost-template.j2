@@ -1,0 +1,17 @@
+#This file was created by Ansible Playbook
+<VirtualHost *:80>
+    ServerName {{ domain_name }}
+    ServerAlias www.{{ domain_name }}
+    ServerAdmin admin@{{ domain_name }}
+    DocumentRoot /var/www/{{ domain_name }}/public_html
+    # Directory rules and access controls
+    <Directory /var/www/{{ domain_name }}/public_html>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Log file locations (Useful for troubleshooting)
+    ErrorLog /var/log/httpd/{{ domain_name }}_error.log
+    CustomLog /var/log/httpd/{{ domain_name }}_access.log combined
+</VirtualHost>

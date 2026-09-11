@@ -1,0 +1,8 @@
+- name: Deploy vhost configuration file
+  hosts: web
+  become: true
+  become_user: root 
+  become_method: sudo 
+  #become_password: false 
+  roles:
+    - vhost 

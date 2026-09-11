@@ -1,0 +1,16 @@
+---
+- name: Create the vhost configuration for the domain {{ domain_name }}
+  ansible.builtin.template:
+     src: vhost-template.j2
+     dest: /etc/httpd/conf.d/{{ domain_name }}.conf
+     mode: '0644'
+
+- name: Create the DocumentRoot
+  ansible.builtin.file:
+    path: /var/www/{{ domain_name }}/public_html
+    state: directory
+    owner: apache
+    group: apache
+    mode: '0755'
+  notify:  
+     - Restart Apache
